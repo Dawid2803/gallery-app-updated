@@ -19,7 +19,7 @@ export class Search extends Component {
       let searchQuery = this.query.value;
       let path = `/search/${searchQuery}`;
     //   this.props.history.push(path);
-      console.log(this.query.value)
+      console.log(path)
     }
 
 
