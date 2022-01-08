@@ -12,6 +12,7 @@ import {
 import Search from "./components/Search";
 import Nav from "./components/Nav";
 import PhotoContainer from "./components/PhotoContainer";
+import NotFound from './components/NotFound';
 import { apiKey } from './config'
 
 
@@ -68,9 +69,10 @@ export class App extends Component {
           <Nav search={this.performSearch} />
           <Switch>
             <Route exact path='/' render={ () => <Redirect to="/cats" />} />
-            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData}  />}></Route> 
-            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} />}></Route> 
-            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} />}></Route> 
+            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData} results="CATS" />} /> 
+            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} results="DOGS" />} /> 
+            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} results="BIRDS" />} /> 
+            <Route component={NotFound} />
           </Switch>
         </div>
       </BrowserRouter>

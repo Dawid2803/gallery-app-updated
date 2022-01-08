@@ -16,7 +16,7 @@ export class PhotoContainer extends Component {
 
         return (
             <div className='photo-container'>
-                <h2>Results</h2>
+                <h2>{this.props.results}</h2>
                 <ul>{this.props.galleryData.map(photo => 
                         <Photo 
                             server={photo.server}
@@ -26,8 +26,6 @@ export class PhotoContainer extends Component {
                             key={photo.id}
                         />
                     )}
-
-                    <NotFound />
                 </ul>
                 
             </div>
