@@ -4,7 +4,17 @@ import NotFound from './NotFound'
 import Photo from './Photo'
 
 export class PhotoContainer extends Component {
+
+    state= {
+        searchedGallery: []
+    }
+
+        topic = this.props.search(this.props.topic);
+
+
     render() {
+
+
         return (
             <div className='photo-container'>
                 <h2>Results</h2>
