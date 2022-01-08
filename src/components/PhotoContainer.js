@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 
-import NotFound from './NotFound'
 import Photo from './Photo'
 
 export class PhotoContainer extends Component {
 
-    state= {
-        searchedGallery: []
-    }
+
 
 
 

@@ -49,13 +49,7 @@ export class App extends Component {
   }
 
 
-  // work in progress
-
-  // handleSearch = (e) => {
-  //   let topic = this.topic.value;
-  //   let path = `/${topic}`;
-  //   this.props.history.push(path);
-  // }
+ 
 
 
   render(){
@@ -65,13 +59,14 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <div >
-          <Search />
-          <Nav search={this.performSearch} />
+          <Search onSearch={this.performSearch} />
+          <Nav />
           <Switch>
             <Route exact path='/' render={ () => <Redirect to="/cats" />} />
             <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData} results="CATS" />} /> 
             <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} results="DOGS" />} /> 
             <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} results="BIRDS" />} /> 
+            <Route path='/search/:searchResult' render={ () => <PhotoContainer galleryData={this.state.galleryData} results="Search Results" />} /> 
             <Route component={NotFound} />
           </Switch>
         </div>
