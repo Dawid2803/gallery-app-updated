@@ -21,8 +21,8 @@ export class App extends Component {
     this.performSearch()
   }
 
-  performSearch = () => {
-    axios.get('https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=09c4b273fe9136275a25231194314587&tags=cats&per_page=24&format=json&nojsoncallback=1')
+  performSearch = (tags = 'dogs') => {
+    axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=09c4b273fe9136275a25231194314587&tags=${tags}&per_page=24&format=json&nojsoncallback=1`)
     .then(resData => {
       this.setState({galleryData: resData.data.photos.photo})
       console.log(this.state.galleryData)
@@ -37,7 +37,7 @@ export class App extends Component {
       <div>
         <Search />
         <Nav />
-        <PhotoContainer />
+        <PhotoContainer galleryData={this.state.galleryData}/>
       </div>
       );
   }
