@@ -14,6 +14,7 @@ export class PhotoContainer extends Component {
                             id={photo.id}
                             secret={photo.secret}
                             title={photo.title}
+                            key={photo.id}
                         />
                     )}
 
