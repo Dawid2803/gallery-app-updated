@@ -21,27 +21,40 @@ import { apiKey } from './config'
 export class App extends Component {
 
   state = {
-    galleryData: []
+    galleryData: [],
+    catsData: [], //state for predetermined searches
+    dogsData: [],
+    birdsData: [],
   }
 
-   
+   //Performs searches for the links provided
+  componentDidMount(){
+    const navData = [
+      {stateType:"catsData", tag: "cats"},
+      {stateType:"dogsData", tag: "dogs"},
+      {stateType:"birdsData", tag: "birds"}];
+      
+    navData.map( navItem => this.performSearch(navItem.stateType, navItem.tag))
+    
+  }
 
 
-
-
-  performSearch = (tags) => {
+//fetches data from flickr API and generates data required to generate URL for photos
+  performSearch = ( stateType, tags) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`)
     .then(resData => {
-      this.setState({galleryData: resData.data.photos.photo})
-      console.log(this.state.galleryData)
+      this.setState({[stateType]: resData.data.photos.photo})
     })
   }
 
-  handleSearch = (e) => {
-    let topic = this.topic.value;
-    let path = `/${topic}`;
-    this.props.history.push(path);
-  }
+
+  // work in progress
+
+  // handleSearch = (e) => {
+  //   let topic = this.topic.value;
+  //   let path = `/${topic}`;
+  //   this.props.history.push(path);
+  // }
 
 
   render(){
@@ -55,9 +68,9 @@ export class App extends Component {
           <Nav search={this.performSearch} />
           <Switch>
             <Route exact path='/' render={ () => <Redirect to="/cats" />} />
-            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.galleryData} search={this.performSearch} topic={"cats"} />}></Route> 
-            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.galleryData} search={this.performSearch} topic={"dogs"}/>}></Route> 
-            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.galleryData} search={this.performSearch} topic={"birds"}/>}></Route> 
+            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData}  />}></Route> 
+            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} />}></Route> 
+            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} />}></Route> 
           </Switch>
         </div>
       </BrowserRouter>

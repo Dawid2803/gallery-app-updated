@@ -9,7 +9,6 @@ export class PhotoContainer extends Component {
         searchedGallery: []
     }
 
-        topic = this.props.search(this.props.topic);
 
 
     render() {
