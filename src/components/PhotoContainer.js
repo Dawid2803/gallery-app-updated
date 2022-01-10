@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withRouter } from 'react-router-dom'
 
 import Photo from './Photo'
 
@@ -35,4 +34,4 @@ export class PhotoContainer extends Component {
     }
 }
 
-export default withRouter(PhotoContainer)
+export default PhotoContainer
