@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 export class Search extends Component {
 
@@ -18,7 +18,7 @@ export class Search extends Component {
       this.props.onSearch('galleryData', this.query.value)
       let searchQuery = this.query.value;
       let path = `/search/${searchQuery}`;
-    //   this.props.history.push(path);
+      this.props.history.push(path);
       console.log(path)
     }
 
@@ -47,4 +47,4 @@ export class Search extends Component {
     }
 }
 
-export default Search
+export default withRouter(Search)
