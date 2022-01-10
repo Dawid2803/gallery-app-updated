@@ -26,7 +26,8 @@ export class App extends Component {
     catsData: [], //state for predetermined searches
     dogsData: [],
     birdsData: [],
-    searchResults: ''
+    searchResults: '',
+    isEmpty: false
   }
 
    //Performs searches for the links provided
@@ -47,7 +48,10 @@ export class App extends Component {
     .then(resData => {
       this.setState({[stateType]: resData.data.photos.photo, searchResults: tags})
     })
-  }
+    .catch(err => {
+      console.log("Error fetching and parsing data: ", err)
+    })
+  };
 
 
  
@@ -67,7 +71,7 @@ export class App extends Component {
             <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData} results="Cats" />} /> 
             <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} results="Dogs" />} /> 
             <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} results="Birds" />} /> 
-            <Route path='/search/:searchResult' render={ () => <PhotoContainer galleryData={this.state.galleryData} results={this.state.searchResults} />} /> 
+            <Route path='/search/:searchResult' render={ () => <PhotoContainer galleryData={this.state.galleryData} results={this.state.searchResults} isEmpty={this.state.isEmpty} />} /> 
             <Route component={NotFound} />
           </Switch>
         </div>

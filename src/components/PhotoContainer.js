@@ -15,7 +15,8 @@ export class PhotoContainer extends Component {
         return (
             <div className='photo-container'>
                 <h2>images of: {this.props.results}</h2>
-                <ul>{this.props.galleryData.map(photo => 
+                <ul>
+                        {this.props.galleryData.map(photo => 
                         <Photo 
                             server={photo.server}
                             id={photo.id}
@@ -24,6 +25,9 @@ export class PhotoContainer extends Component {
                             key={photo.id}
                         />
                     )}
+
+
+                    
                 </ul>
                 
             </div>
