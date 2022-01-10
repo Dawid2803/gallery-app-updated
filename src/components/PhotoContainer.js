@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom'
 
 import Photo from './Photo'
 
@@ -13,7 +14,7 @@ export class PhotoContainer extends Component {
 
         return (
             <div className='photo-container'>
-                <h2>{this.props.results}</h2>
+                <h2>images of: {this.props.results}</h2>
                 <ul>{this.props.galleryData.map(photo => 
                         <Photo 
                             server={photo.server}
@@ -30,4 +31,4 @@ export class PhotoContainer extends Component {
     }
 }
 
-export default PhotoContainer
+export default withRouter(PhotoContainer)

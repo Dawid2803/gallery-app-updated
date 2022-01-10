@@ -19,7 +19,9 @@ export class Search extends Component {
       let searchQuery = this.query.value;
       let path = `/search/${searchQuery}`;
       this.props.history.push(path);
-      console.log(path)
+      const results = searchQuery;
+      this.setState({searchResults: results})
+      e.currentTarget.reset();
     }
 
 
@@ -47,4 +49,6 @@ export class Search extends Component {
     }
 }
 
+
+//withRouter is used to get access to the history object
 export default withRouter(Search)

@@ -26,6 +26,7 @@ export class App extends Component {
     catsData: [], //state for predetermined searches
     dogsData: [],
     birdsData: [],
+    searchResults: ''
   }
 
    //Performs searches for the links provided
@@ -44,7 +45,7 @@ export class App extends Component {
   performSearch = ( stateType, tags) => {
     axios.get(`https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${tags}&per_page=24&format=json&nojsoncallback=1`)
     .then(resData => {
-      this.setState({[stateType]: resData.data.photos.photo})
+      this.setState({[stateType]: resData.data.photos.photo, searchResults: tags})
     })
   }
 
@@ -59,14 +60,14 @@ export class App extends Component {
     return (
       <BrowserRouter>
         <div >
-          <Search onSearch={this.performSearch} />
+          <Search onSearch={this.performSearch} searchResults={this.state.searchResults} />
           <Nav />
           <Switch>
             <Route exact path='/' render={ () => <Redirect to="/cats" />} />
-            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData} results="CATS" />} /> 
-            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} results="DOGS" />} /> 
-            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} results="BIRDS" />} /> 
-            <Route path='/search/:searchResult' render={ () => <PhotoContainer galleryData={this.state.galleryData} results="Search Results" />} /> 
+            <Route path='/cats' render={ () => <PhotoContainer galleryData={this.state.catsData} results="Cats" />} /> 
+            <Route path='/dogs' render={ () => <PhotoContainer galleryData={this.state.dogsData} results="Dogs" />} /> 
+            <Route path='/birds' render={ () => <PhotoContainer galleryData={this.state.birdsData} results="Birds" />} /> 
+            <Route path='/search/:searchResult' render={ () => <PhotoContainer galleryData={this.state.galleryData} results={this.state.searchResults} />} /> 
             <Route component={NotFound} />
           </Switch>
         </div>
